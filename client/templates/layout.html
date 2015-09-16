@@ -1,0 +1,26 @@
+<template name="layout">
+	<header>
+		<div class="header">
+			<h3>My Budget App</h3>
+		</div>
+	</header>
+
+	<div class="container">
+	<main>
+		
+		<!-- for routed templates ! -->
+		{{>yield}}
+
+	</main>
+	</div>  
+</template> 
+
+
+<template name="notFound">
+	<div class="center">
+	<h1>Nothing here</h1><br>
+	<h2>You hit  a page which does'nt exist!</h2>
+	</div>
+</template>
+
+
