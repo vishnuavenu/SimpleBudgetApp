@@ -1,7 +1,14 @@
 <template name="main">
+<h3> Our todays budget is :<strong>{{budget}}</strong> </h3> 
 
-<h1>This is Main page</h1>
-<h3> Our todays budget is : </h3> 
-{{budget}}
+<form class="New_Expense">
+	<input type="text" name="name" placeholder="Enter the Item/Activity you spend">
+	<input type="text" name="spent" placeholder="Amout you have spent">
+	<button class="addExpense">Add Expense</button>
+</form>
+<h2>List of Todays Expense</h2>
+{{#each expense_list2}}
+<p>{{name}}</p>
+{{/each}}
 
 </template>

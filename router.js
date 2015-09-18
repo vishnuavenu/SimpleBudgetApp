@@ -17,7 +17,6 @@ Router.route("/", {
 		if(Session.equals('budget', "None")){
 			this.render("askbudget");
 		}else{
-			console.log("Session : "+ Session.get("expense"))
 			this.next();
 			
 		}
