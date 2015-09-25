@@ -5,17 +5,32 @@ Router.configure({
 	notFoundTemplate: 'notFound'
 });
 
+// Landing page
+Router.route("/ask", {
+	name: "ask",
+	template:"askbudget",
+});
 
-// Router
+
+// To main page
 Router.route("/", {
 	
 	name: "home",
 	template : "main",
 
+	waitOn : function(){
+		return Meteor.subscribe("todays-detail");
+	}
+	,
+
+	data: function(){
+		return Budget.find();
+	},
 
 	onBeforeAction: function(){
 		if(Session.equals('budget', "None")){
-			this.render("askbudget");
+			Router.go("ask");
+			//this.render("askbudget");
 		}else{
 			this.next();
 			

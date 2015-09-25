@@ -1,5 +1,5 @@
 <template name="main">
-<h3> Our todays budget is :<strong>{{budget}}</strong> </h3> 
+<h3> Our todays budget is :{{ budget.budget }}  </h3> 
 
 <form class="New_Expense">
 	<input type="text" name="name" placeholder="Enter the Item/Activity you spend">
@@ -7,8 +7,9 @@
 	<button class="addExpense">Add Expense</button>
 </form>
 <h2>List of Todays Expense</h2>
-{{#each expense_list2}}
-<p>{{name}}</p>
+{{ #each expense_list }}
+{{ >expense_list }}
+<!--- <p>{{>this.time}}, {{>this.name}}, {{>this.amount}}</p> -->
 {{/each}}
 
 </template>

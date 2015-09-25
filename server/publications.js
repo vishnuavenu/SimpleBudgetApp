@@ -1,3 +1,3 @@
 Meteor.publish("todays-detail", function(){
-	return BUDGET.find();
+	return Budget.find();
 });

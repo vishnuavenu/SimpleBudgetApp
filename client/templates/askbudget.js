@@ -1,3 +1,6 @@
+
+
+
 // handling events for this template
 
 Template.askbudget.events({
@@ -18,6 +21,10 @@ Template.askbudget.events({
 
 		// Time to create the Fresh todays Budget
 
+		console.log("Is the Budget is already set: " +Meteor.call("isBudgetSet",date), function(err, res){
+			if(err) return false; 
+			else return true;
+		});
 		if(Session.equals("budget", "None")){
 			console.log("No BudgetSet safe to proceed with this session")
 			Session.set("budget", date);
@@ -27,9 +34,14 @@ Template.askbudget.events({
 		}
 
 		
-		var result = Meteor.call("createNewBudget", Budget);
+		var result = Meteor.call("createNewBudget", Budget, function(error, result){
+			if (error) return "New  Budget could'nt created !"
+		
+			console.log(" Result fromt the Call : "+result);
+			return result
+		});
 
-		console.log(" Result fromt the Call : "+result);
+		
 		console.log("New Budget Created   : "+ Session.get("budget"));
 		event.target.text.value="";
 
