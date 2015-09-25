@@ -1,26 +1,28 @@
-Template.main.onCreated(function(){
-	//create new reactive variable
-	this.expense_list= new ReactiveVar();
-	this.expense_list.set(false);
+Template.registerHelper("equals", function(a, b){
+	return a === b;
 });
-
 
 // Helper Methods for this Template
 Template.main.helpers({
 
 	budget: function(){
 		
-        return Budget.findOne({date: Session.get("budget")});
+        return Budget.findOne({_id: Session.get("budget_id")});
 	},
 
 	expense_list :function(){
-		
-		Meteor.call("getExpenseDetail", Session.get("budget"), function(error, result){
-			if(error) return "Error In Accessing List";
-			console.log("Expense List"+ result);
-			Template.instance().expense_list.set(result)
-		});
-			return Template.instance().expense_list.get();
+			var result = Budget.findOne({ _id: Session.get("budget_id") }, { _id:0, expenses:1 });
+			if(result === 'null'){
+				console.log("Got Nothing !");
+				return "Expenditure is yet to make";}
+
+			if(result.expenses.length == 0){
+				console.log("Expenses Empty");
+				return "None";
+			}
+			console.log("result from the expense_list : ")
+			console.log(result.expenses);
+			return result.expenses;
 		},
 
 	budget2: function(){
@@ -30,6 +32,8 @@ Template.main.helpers({
 
 
 });
+
+
 
 // Add event handlers
 Template.main.events({
@@ -42,8 +46,10 @@ Template.main.events({
 		}  
 
 		console.log("Expense Recorded : " + expense.name +" , "+expense.amount+" . At "+expense.time);
-
-
+		Meteor.call("recordExpense", Session.get("budget_id"), expense);
+		
+		event.target.name.value = "";
+		event.target.spent.value = "";
 	}
 });
 

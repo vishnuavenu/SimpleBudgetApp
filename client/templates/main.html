@@ -7,9 +7,13 @@
 	<button class="addExpense">Add Expense</button>
 </form>
 <h2>List of Todays Expense</h2>
+{{ #if equals expense_list "None"}}
+	<h3>{{ expense_list }}</h3>
+{{else}}
 {{ #each expense_list }}
-{{ >expense_list }}
+<h3> {{ name}} {{ amount }} {{ time }} </h3>
 <!--- <p>{{>this.time}}, {{>this.name}}, {{>this.amount}}</p> -->
 {{/each}}
+{{/if}}
 
 </template>

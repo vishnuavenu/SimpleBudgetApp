@@ -9,7 +9,5 @@ markdown
 iron:router
 twbs:bootstrap
 aldeed:collection2
-sanjo:jasmine
-velocity:html-reporter
 autopublish
 reactive-var

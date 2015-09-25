@@ -23,12 +23,9 @@ Router.route("/", {
 	}
 	,
 
-	data: function(){
-		return Budget.find();
-	},
-
 	onBeforeAction: function(){
-		if(Session.equals('budget', "None")){
+		if(Session.equals('budget_id', "None")){
+			console.log("dsafsafdfsdfdsgsdgdsgsd "+ Session.get("budget_id"));
 			Router.go("ask");
 			//this.render("askbudget");
 		}else{
@@ -36,4 +33,5 @@ Router.route("/", {
 			
 		}
 	}
+	
 });

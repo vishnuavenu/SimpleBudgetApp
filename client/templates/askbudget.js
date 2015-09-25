@@ -21,28 +21,19 @@ Template.askbudget.events({
 
 		// Time to create the Fresh todays Budget
 
-		console.log("Is the Budget is already set: " +Meteor.call("isBudgetSet",date), function(err, res){
-			if(err) return false; 
-			else return true;
-		});
-		if(Session.equals("budget", "None")){
-			console.log("No BudgetSet safe to proceed with this session")
-			Session.set("budget", date);
-		}else{
-			console.log("Seems users Already set the budget for the day")
-			Session.set("budget", date);
-		}
-
-		
 		var result = Meteor.call("createNewBudget", Budget, function(error, result){
-			if (error) return "New  Budget could'nt created !"
+		if (error) return "New  Budget could'nt created !"
 		
-			console.log(" Result fromt the Call : "+result);
-			return result
+			console.log(" Result from the Call : "+result);
+			// Setting Session 
+			Session.set("budget_id", result);
+			console.log("Session Set to "+ Session.get(budget_id));
+
 		});
 
 		
-		console.log("New Budget Created   : "+ Session.get("budget"));
+		
+		
 		event.target.text.value="";
 
 

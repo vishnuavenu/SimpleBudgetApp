@@ -1,11 +1,9 @@
 // All Function intended to be at Server 
 if(Meteor.isServer){
 
-
-
 	// Defining Methods 
 
-	Meteor.methods({
+Meteor.methods({
 
 		// This function is Triggred on Intialize askbudget view
 		// this will create a new Document on which detail of 
@@ -25,7 +23,7 @@ if(Meteor.isServer){
 
 		// This method will update the current day document's 
 		// expenditure list on insertion of each new expenses.
-		"updateCurrentBudget": function(updates){
+		"updateCurrentBudget": function(updates ){
 			check(updates, Object);
 
 			try{
